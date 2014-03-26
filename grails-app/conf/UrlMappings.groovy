@@ -4,18 +4,7 @@ class UrlMappings {
 
         "/contents" (resources: 'content')
 
-//       "/contents"(controller:"content"){
-//           action = [GET:"index", POST:"save"]
-//       }
-//       "/contents/$id"(controller:"content"){
-//            action = [GET:"show", PUT:"update", DELETE:"delete"]
-//       }
-
-        "/contents/$id?(.$format)?"(controller:"content"){
-            action = [GET:"show", PUT:"update", DELETE:"delete", POST:"save"]
-        }
-
-
+        "/contents/search" (controller: 'content', action: 'search')
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

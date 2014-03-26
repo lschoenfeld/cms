@@ -3,48 +3,87 @@ package org.me
 import grails.rest.RestfulController
 import grails.transaction.Transactional
 
+/**
+ * Restful content management controller
+ */
 @Transactional(readOnly = true)
-class ContentController  {
+class ContentController {
 
-    static responseFormats = ['json','xml']
+    def contentService
+
+    static allowedMethods = [search : "POST"]
+
+    static responseFormats = ['json', 'xml']
+
+    /**
+     * GET cms/contents
+     * @return
+     */
 
     def index() {
-        println 'index action'
-        respond Content.list();
+
+        respond Content.list()
     }
 
+    /**
+     * GET cms/contents/id
+     * @param content
+     * @return
+     */
     def show(Content content) {
-        println 'show action'
+
         respond content
     }
 
+    /**
+     * POST cms/contents
+     * @param content
+     * @return
+     */
     @Transactional
     def save(Content content) {
 
         if (content.hasErrors()) {
             respond content.errors
-        }
-        else {
+        } else {
             content.save()
             respond content
         }
 
     }
 
+    /**
+     * PUT  cms/contents/{id}
+     * @param content
+     * @return
+     */
     @Transactional
     def update(Content content) {
+
         if (content.hasErrors()) {
             respond content.errors
-        }
-        else {
+        } else {
             content.save()
             respond content
         }
-
     }
 
+    /**
+     * DELETE cms/contents/id
+     * @param content
+     * @return
+     */
+    @Transactional
     def delete(Content content) {
         content.delete()
         respond Content.list()
+    }
+
+    def search(Content content) {
+
+        def list = contentService.search(content)
+
+
+        respond list
     }
 }

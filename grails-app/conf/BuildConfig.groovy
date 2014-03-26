@@ -50,9 +50,12 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+        compile 'org.apache.commons:commons-lang3:3.3'
+        compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7'
     }
 
     plugins {
+        compile ":rest:0.8"
         // plugins for the build system only
         build ":tomcat:7.0.52.1"
 

@@ -93,6 +93,7 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+        time.bootStrap = new Date()
     }
     production {
         grails.logging.jul.usebridge = false
