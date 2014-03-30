@@ -17,6 +17,8 @@
 </head>
 
 <body>
+
+
 <table>
     <tr>
         <th>Name</th>
@@ -32,5 +34,9 @@
 
     </g:each>
 </table>
+<BR>
+<BR>
+<g:paginate total="${total}" action="index" max="10" offset="0"/>
+
 </body>
 </html>

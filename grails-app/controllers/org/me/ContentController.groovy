@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 /**
  * Restful content management controller
  */
-@Transactional(readOnly = true)
+
 class ContentController {
 
     def contentService
@@ -40,7 +40,7 @@ class ContentController {
      * @param content
      * @return
      */
-    @Transactional
+
     def save(Content content) {
 
         if (content.hasErrors()) {
@@ -57,7 +57,7 @@ class ContentController {
      * @param content
      * @return
      */
-    @Transactional
+
     def update(Content content) {
 
         if (content.hasErrors()) {
@@ -73,7 +73,7 @@ class ContentController {
      * @param content
      * @return
      */
-    @Transactional
+
     def delete(Content content) {
         content.delete()
         respond Content.list()

@@ -1,35 +1,47 @@
 package org.me
-
-import grails.converters.JSON
-import groovy.json.JsonSlurper
-
 /**
  * Restful client controller for administrative functions.
  * Note that some methods are not implemented.
  */
 class ContentRestClientController {
 
-
+    static allowedMethods = [save: ['GET', 'POST'], list: 'GET', get: 'GET']
 
     def contentRestClientService
 
-    def list(){
+    def list() {
 
         render contentRestClientService.list()
-
     }
 
 
-    def get(){
+    def get() {
 
         render contentRestClientService.get(params.int('id'))
     }
 
     def save() {
 
-        org.me.client. Content content = new org.me.client.Content(author : "mr client", documentKey: '!TheKEY', entry: 'blah blah blah')
-        render contentRestClientService.save(content)
 
+        if (params.author && params.documentKey && params.entry) {
+
+
+            org.me.client.Content content = new org.me.client.Content(
+                    author: params.author, documentKey: params.documentKey, entry: params.entry)
+
+            try {
+                contentRestClientService.save(content)
+            }
+            catch (Exception ex) {
+
+                flash.message = ex.toString()
+                return
+            }
+
+            flash.message = "SAVED"
+        } else {
+            flash.message = "missing input"
+        }
     }
 
     def update() {

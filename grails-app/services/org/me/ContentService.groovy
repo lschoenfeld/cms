@@ -8,10 +8,16 @@ import grails.transaction.Transactional
 @Transactional
 class ContentService {
 
+    def getViewable(Date date, int max, int offset) {
+
+        Content.findAllByStartDateLessThanAndEndDateGreaterThan(date, date, [sort: "documentKey", max:max, offset:offset])
+    }
+
     def getViewable(Date date) {
 
         Content.findAllByStartDateLessThanAndEndDateGreaterThan(date, date, [sort: "documentKey"])
     }
+
 
     def search(Content content) {
 

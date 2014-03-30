@@ -16,6 +16,40 @@ class UserControllerSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
+    void "test index action"() {
+
+        ContentService contentService;
+        def mockControl
+        def result
+
+
+        setup:
+        mockControl = mockFor(ContentService)
+
+        mockControl.demand.getViewable(1..1) { Date d ->
+            [new Content(author:'me', documentKey:'doc2', entry:'hello')]
+
+
+        }
+        mockControl.demand.getViewable(1..1) { Date d , int max, int offset ->
+            [new Content(author:'me', documentKey:'doc2', entry:'hello')]
+
+        }
+        contentService = mockControl.createMock()
+        controller.contentService = contentService
+
+        when:
+
+        def model = controller.index()
+
+        then:
+        assert model.size() ==2
+        assert model.contents.size() ==1
+        assert model.total == 1
     }
+
+
+    void "test show action"() {
+    }
+
 }
